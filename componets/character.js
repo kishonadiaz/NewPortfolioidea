@@ -44,7 +44,7 @@ export  class Character{
         this.Tween = new TWEEN.Tween();
         this.moveback = false;
         this.nextanime = "";
-        this.x = 0
+        this.x = 0.0
         this.y = 0
         this.z = 0
        
@@ -66,6 +66,10 @@ export  class Character{
     move(x,y,z){
         if(this.model)
             this.model.position.set(x,y,z);
+    }
+    roatate(x,y,z){
+        if(this.model)
+            this.model.rotation.set(0,(Math.PI / 2),0)
     }
     addAnimetions(uri,name){
         this.animations.add(uri,name);
@@ -92,9 +96,9 @@ export  class Character{
             var anim = this.animations;
          
             var cli = anim.animations[anim.CURRENTLIST[this.animations.activeanimation].position];
-            console.log(anim,anim.CURRENTLIST[this.animations.activeanimation].position);
+            //console.log(anim,anim.CURRENTLIST[this.animations.activeanimation].position);
             var anime = this.mixer.clipAction(cli);
-            
+           
            // this.clip.tracks.splice(3, 3);
            
             //console.log(this.clip.tracks);
@@ -122,12 +126,12 @@ export  class Character{
                     //this.anime.stop();
                     this.anime = {};
                     
-                        console.log("asflkhaksfhkljasdasdfh");
+                        //console.log("asflkhaksfhkljasdasdfh");
                    
                     anim.getObjectByName(this.animations.activeanimation).tracks[7].values= [];
                     this.Tween.stop();
                     this.Tween = {};
-                    console.log(anim);
+                    //console.log(anim);
                     //console.log(this.oldheadtrack);
                     //console.log(this.animations.getObjectByName(this.animations.activeanimation).tracks)
                     //anim.getObjectByName(this.animations.activeanimation).tracks.splice(6,6)
@@ -202,9 +206,9 @@ export  class Character{
                         
                         this.anime = {}
                         anim.getObjectByName(this.animations.activeanimation).tracks[7].values= this.oldheadtrack
-                        console.log(anim)
+                        //console.log(anim)
                         var cli = anim.animations[anim.CURRENTLIST[this.animations.activeanimation].position];
-                        console.log(anim,anim.CURRENTLIST[this.animations.activeanimation].position);
+                        //console.log(anim,anim.CURRENTLIST[this.animations.activeanimation].position);
                         var anime = this.mixer.clipAction(cli);
                         //anime.reset();
                         
@@ -298,7 +302,11 @@ export  class Character{
             //this.animations.reload()
         })
     }
-    
+    lookat(x,y,z){
+        var arg = arguments;
+        if(this.model)
+            this.model.lookAt(x,y,z);
+    }
     load=()=>{
         const loader = new GLTFLoader();
 

@@ -61,7 +61,7 @@ var observer = new MutationObserver(function (mutations) {
     main = document.querySelector("#content");
     contm = main.getBoundingClientRect();
     mh = contm.height
-    menu.style.height = `${mh+8}px`;
+    menu.style.height = `${mh}px`;
     console.log(mh)
     mutations.forEach(function (mutation) {
         

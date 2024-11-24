@@ -201,7 +201,7 @@ header('Permissions-Policy: autoplay=(self)');
       </ul>
       <div class="d-flex align-items-center">
         <figcaption style="margin: 0 5px" class="blockquote-footer">
-            Version: 1.0.3
+            Version: 1.0.4
         </figcaption>
       </div>
   
@@ -257,7 +257,7 @@ header('Permissions-Policy: autoplay=(self)');
     </ul>
     <div class="d-flex align-items-center">
         <figcaption style="margin: 0 5px" class="blockquote-footer">
-            Version: 1.0.3
+            Version: 1.0.4
         </figcaption>
       </div>
   </div>

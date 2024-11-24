@@ -1,8 +1,8 @@
 import markdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/+esm'
 import { full as emoji } from 'https://cdn.jsdelivr.net/npm/markdown-it-emoji@3.0.0/+esm'
 import twemoji from 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/+esm'
-import emo from '../emojis.json' with { type: 'json' };
 import OctokitApiReader from '../componets/octokitReader.js'
+import EmoJis from './emoji.js'
 
 // function emojiToUnicode(emojis) {
 //     return emojis.codePointAt(0).toString(16).toUpperCase();
@@ -13,7 +13,7 @@ import OctokitApiReader from '../componets/octokitReader.js'
   
 //   console.log(unicode); // Output: 1F602
 
-
+var emo = new EmoJis();
 var ockit = new OctokitApiReader();
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -79,7 +79,7 @@ observer.observe(main, config);
 //new ResizeObserver(outputsize).observe(main)
 md.renderer.rules.emoji = function(token, idx) {
     console.log("sdlfkhlksdf");
-    return `<img src=${emo[token[idx].markup]}/>`;
+    return `<img src=${emo.emojis[token[idx].markup]}/>`;
 };
 var ren = md.render(decodedString);
 // console.log(ren.find(data=>data));

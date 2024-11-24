@@ -34,7 +34,7 @@ A robust document encryption application that prioritizes data security, ensurin
 ---
 
 ## :handshake: Connect With Me
-- :briefcase: [Resume](https://kishondiaz.com/assets/resume/Kishon%20Diaz%20Resume%20Template.docx)
+- :briefcase: [Resume](https://kishondiaz.com/assets/resume/Kishon_Diaz_Resume_Template.docx)
 - :e-mail: [Contact Me](https://kishondiaz.com?page=contactme)
 
 

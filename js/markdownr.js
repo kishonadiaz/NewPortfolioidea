@@ -101,7 +101,7 @@ for(var h of ren.split('\n')){
             <a class="nav-link "  href="#${sp[1]}"><img src="${sp[0]}"/> ${sp[1].replace("/","")}</a>
         </li>`
         menufill.innerHTML += dd;
-        h = h.replace(">",` id="${sp[0]}">`)
+        h = h.replace(">",` id="${sp[1]}">`)
         strd +=h+"\n";      
     }else{
         strd +=h+"\n";

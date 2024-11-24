@@ -1,4 +1,4 @@
-# Hi there! 👋 I'm Kishon Diaz
+# Hi there! :wave: I'm Kishon Diaz
 
 Welcome to my corner of the tech world! I am a passionate programmer and artist dedicated to turning innovative ideas into reality. Whether it's developing web applications, creating 3D models, or exploring cutting-edge technologies, I aim to push boundaries and craft meaningful solutions.
 

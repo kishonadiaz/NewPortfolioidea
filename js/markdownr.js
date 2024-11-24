@@ -3,14 +3,14 @@ import { full as emoji } from 'https://cdn.jsdelivr.net/npm/markdown-it-emoji@3.
 import twemoji from 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/+esm'
 import OctokitApiReader from '../componets/octokitReader.js'
 
-function emojiToUnicode(emojis) {
-    return emojis.codePointAt(0).toString(16).toUpperCase();
-  }
+// function emojiToUnicode(emojis) {
+//     return emojis.codePointAt(0).toString(16).toUpperCase();
+//   }
   
-  const emojis = "🛠️";
-  const unicode = emojiToUnicode(emojis);
+//   const emojis = "🛠️";
+//   const unicode = emojiToUnicode(emojis);
   
-  console.log(unicode); // Output: 1F602
+//   console.log(unicode); // Output: 1F602
 
 
 var ockit = new OctokitApiReader();
@@ -95,7 +95,7 @@ for(var h of ren.split('\n')){
             <a class="nav-link "  href="#${hs}">${hs}</a>
         </li>`
         menufill.innerHTML += dd;
-        h = h.replace(">",` id="${hs}">`)
+        //h = h.replace(">",` id="${hs}">`)
         strd +=h+"\n";      
     }else{
         strd +=h+"\n";

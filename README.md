@@ -22,20 +22,20 @@ When I'm not coding, you'll find me enjoying the outdoors, diving into a great b
 ---
 
 ## 🌟 Featured Projects
-### 🔗 [YTSKIPButton](https://chromewebstore.google.com/detail/ytskipbutton/epajgkidnfpaaciekooncbkjmjhkaapi)
+### :link: [YTSKIPButton](https://chromewebstore.google.com/detail/ytskipbutton/epajgkidnfpaaciekooncbkjmjhkaapi)
 This Chrome extension enhances your YouTube viewing experience by ensuring that the skip button is readily available when accessible or by adding a skip button that allows you to skip ads. Unlike ad blockers, this extension fully complies with YouTube’s Terms of Service, which prohibits ad blocking. Instead of blocking ads, the extension either shows the skip button when it's typically hidden or pushes the ad to the end, allowing the skip button to become active.
 
-### 🔗 [Doc-Solutions](https://doc-solutions.com/)
+### :link: [Doc-Solutions](https://doc-solutions.com/)
 A robust document encryption application that prioritizes data security, ensuring sensitive information stays protected.
 
-### 🔗 [AI Showcase](https://kishondiaz.com)
+### :link: [AI Showcase](https://kishondiaz.com)
 (Coming Soon) An interactive AI project utilizing cutting-edge tech to demonstrate innovative capabilities.
 
 ---
 
 ## 🤝 Connect With Me
-- 📧 [Contact Me](https://kishondiaz.com?page=contactme)
-- 💼 [Resume](https://kishondiaz.com/assets/resume/Kishon%20Diaz%20Resume%20Template.docx)
+- :e-mail: [Contact Me](https://kishondiaz.com?page=contactme)
+- 💼 :briefcase: [Resume](https://kishondiaz.com/assets/resume/Kishon%20Diaz%20Resume%20Template.docx)
 
 ---
 

@@ -98,7 +98,7 @@ for(var h of ren.split('\n')){
         var sp = hs.split(" ");
 
         var dd = `<li  class="nav-item">
-            <a class="nav-link "  href="#${sp[1]}"><img src="${sp[0]}"/> ${sp[1].replace("/","")}</a>
+            <a class="nav-link "  href="#${sp[0]}${sp[1]}"><img src="${sp[0]}"/> ${sp[1].replace("/","")}</a>
         </li>`
         menufill.innerHTML += dd;
         //h = h.replace(">",` id="${hs}">`)

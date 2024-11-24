@@ -94,6 +94,8 @@ for(var h of ren.split('\n')){
         hs = hs.replaceAll("h2","");
         hs = hs.replaceAll("/","");
         hs = hs.replaceAll("img src","")
+        hs = hs.replaceAll("=","")
+
         var sp = hs.split(" ");
         var dd = `<li  class="nav-item">
             <a class="nav-link "  href="#${sp[1]}"><img src="${sp[0]}"/> ${sp[1]}</a>

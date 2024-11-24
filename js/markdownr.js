@@ -1,6 +1,7 @@
 import markdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/+esm'
 import { full as emoji } from 'https://cdn.jsdelivr.net/npm/markdown-it-emoji@3.0.0/+esm'
 import twemoji from 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/+esm'
+import * as emo from '../emojis.json'
 import OctokitApiReader from '../componets/octokitReader.js'
 
 // function emojiToUnicode(emojis) {
@@ -76,7 +77,8 @@ console.log(main)
 observer.observe(main, config);
 //new ResizeObserver(outputsize).observe(main)
 md.renderer.rules.emoji = function(token, idx) {
-    return '<span class="emoji emoji_' + token[idx].markup + '"></span>';
+    
+    return `<img src=${emo[token[idx].markup]}/>`;
 };
 var ren = md.render(decodedString);
 // console.log(ren.find(data=>data));

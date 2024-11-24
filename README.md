@@ -13,7 +13,7 @@ When I'm not coding, you'll find me enjoying the outdoors, diving into a great b
 
 ---
 
-## 1F6E0 Skills
+## :hammer_and_wrench: Skills
 - **Programming**: Python, JavaScript, C++, C#
 - **3D Modeling**: Blender, CAD
 - **Web Development**: HTML, CSS, Node.js, React

@@ -1,7 +1,7 @@
 import markdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/+esm'
 import { full as emoji } from 'https://cdn.jsdelivr.net/npm/markdown-it-emoji@3.0.0/+esm'
 import twemoji from 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/+esm'
-import * as emo from '../emojis.json'
+import emo from '../emojis.json' with { type: 'json' };
 import OctokitApiReader from '../componets/octokitReader.js'
 
 // function emojiToUnicode(emojis) {
@@ -93,8 +93,10 @@ for(var h of ren.split('\n')){
         hs  = hs.replaceAll(">","");
         hs = hs.replaceAll("h2","");
         hs = hs.replaceAll("/","");
+        hs = hs.replaceAll("img src","")
+        var sp = hs.split(" ");
         var dd = `<li  class="nav-item">
-            <a class="nav-link "  href="#${hs}">${hs}</a>
+            <a class="nav-link "  href="#${sp[1]}"><img src="${sp[0]}"/> ${sp[1]}</a>
         </li>`
         menufill.innerHTML += dd;
         //h = h.replace(">",` id="${hs}">`)

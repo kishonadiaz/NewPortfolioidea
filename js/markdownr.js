@@ -77,7 +77,7 @@ console.log(main)
 observer.observe(main, config);
 //new ResizeObserver(outputsize).observe(main)
 md.renderer.rules.emoji = function(token, idx) {
-    
+    console.log("sdlfkhlksdf");
     return `<img src=${emo[token[idx].markup]}/>`;
 };
 var ren = md.render(decodedString);

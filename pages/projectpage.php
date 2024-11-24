@@ -67,6 +67,9 @@
     #content p {
         padding:0;
     }
+    #content img, #menufill img{
+        height:57px;
+    }
     .navbar{
         background:lightgrey!important;
     }

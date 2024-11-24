@@ -104,7 +104,7 @@
         </ul>
         
     </div>
- :star2:
+ 
 </div>
 <main>
     <div>

@@ -51,6 +51,7 @@ var md = markdownIt({
     linkify:true,
     typographer: true,
     breaks:true,
+    
 }).use(emoji);
 
 console.log(md);

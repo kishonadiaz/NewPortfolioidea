@@ -76,7 +76,7 @@ console.log(main)
 observer.observe(main, config);
 //new ResizeObserver(outputsize).observe(main)
 md.renderer.rules.emoji = function(token, idx) {
-    return twemoji.parse(token[idx].content);
+    return '<span class="emoji emoji_' + token[idx].markup + '"></span>';
 };
 var ren = md.render(decodedString);
 // console.log(ren.find(data=>data));

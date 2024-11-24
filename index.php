@@ -270,7 +270,7 @@ header('Permissions-Policy: autoplay=(self)');
         <div id="sal">
           <h6>Salutations I am</h6>
           <h1>Kishon Diaz</h1>
-            <a class="btn btn-primary" href="./assets/resume/Kishon Diaz Resume Template.docx" download>Download Resume</a>
+            <a class="btn btn-primary" href="./assets/resume/Kishon_Diaz_Resume_Template.docx" download>Download Resume</a>
             <div class="row iconcont">
               <a href="https://www.linkedin.com/in/kishon-diaz"><i class="fa-brands fa-linkedin-in"></i></a>
               <a href="https://github.com/kishonadiaz " target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>

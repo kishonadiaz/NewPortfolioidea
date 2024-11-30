@@ -6,7 +6,7 @@ var boe = new OctokitApiReader();
 var f = await boe.getAllrepos();
 for(var i of f.data){
     if(!i.archived){
-        var dd = `<a href="index.php?link=projectpage&d=${i.name}" class="list-group-item list-group-item-action">
+        var dd = `<a href="index.php?link=pages/projectpage&d=${i.name}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">${i.name}</h5>
                     <small class="text-muted">${new Date(i.updated_at).toLocaleDateString(

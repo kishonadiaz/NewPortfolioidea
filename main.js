@@ -80,7 +80,7 @@ setTimeout(()=>{
 },10)
 
 var el = document.createElement("div");
-el.innerHTML = "<h1>TEst</h1>";
+el.innerHTML = "<h1></h1>";
 var cssobj = new CSS3DObject(el)
 console.log((window.innerWidth/(window.innerWidth/window.innerHeight)))
 cssobj.position.set(window.innerWidth/(window.innerWidth/window.innerHeight),0,0);

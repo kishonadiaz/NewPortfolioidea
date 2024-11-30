@@ -96,13 +96,35 @@ for(var h of ren.split('\n')){
         hs = hs.replaceAll("img src","")
         hs = hs.replaceAll("=","")
 
-        var sp = hs.split(" ");
+        var sp = hs
+        if(hs.includes(":") === true){
+            sp = hs.split(" ");
+            var d = sp.shift();
+            sp = Array(sp).join("," ).replaceAll(",", " ").replaceAll("/","")
+           //sp =sp.split("," ," ");
+        }  
+        else{
+            sp = hs;
+            sp = sp.replaceAll("/","")
+        }
 
-        var dd = `<li  class="nav-item">
-            <a class="nav-link "  href="#${sp[1]}"><img src="${sp[0]}"/> ${sp[1].replace("/","")}</a>
-        </li>`
+        console.log( hs.includes(":"),typeof sp);
+        
+        var dd  = `<li  class="nav-item">
+                    <a class="nav-link "  href="#${sp}">${sp}</a>
+                </li>`
+        h = h.replace(">",` id="${sp}">`)
+        if(sp.includes(":") === true){
+            dd = `<li  class="nav-item">
+                <a class="nav-link "  href="#${sp[1].replace("/","")}">
+                    <img src="${sp[0]}"/> ${sp[1].replace("/","")}
+                </a>
+            </li>`
+            h = h.replace(">",` id="${sp[1].replace("/","")}">`)
+        }
+        
         menufill.innerHTML += dd;
-        h = h.replace(">",` id="${sp[1]}">`)
+        
         strd +=h+"\n";      
     }else{
         strd +=h+"\n";

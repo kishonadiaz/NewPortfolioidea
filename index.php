@@ -1,7 +1,26 @@
 <?php
-
+ob_start(); // Start output buffering
 header('Access-Control-Allow-Origin: *');
 header('Permissions-Policy: autoplay=(self)');
+
+header('Access-Control-Allow-Origin: *'); 
+
+header("Access-Control-Allow-Credentials: true");
+
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+
+header('Access-Control-Max-Age: 1000');
+
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+
+//session_set_cookie_params(['samesite' => 'None']);
+
+session_name("kport");
+
+session_start();
+ob_end_flush(); // Send the buffered output including the modified header
+require_once 'config.php';
+require_once 'createtable.php'
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +43,22 @@ header('Permissions-Policy: autoplay=(self)');
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163/examples/jsm/"
     }
   }
+  
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.30.7/dist/editorjs.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.7.4/dist/quote.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-alignment-blocktune@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/attaches@1.3.0/dist/bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-toggle-block"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-drag-drop"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-parser@1/build/Parser.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.browser.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/createjs@1.0.1/builds/1.0.0/createjs.min.js"></script> -->
 <style>
   .content{
@@ -161,14 +195,27 @@ header('Permissions-Policy: autoplay=(self)');
     top:0;
     right:0;
   }
+  img, video {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+  /* .toast{
+    transform:translateX(100%);
+    transition: transform .1s ease-in-out 
+  }
+  .toast.show{
+    transform:translateX(0);
+  } */
 </style>
+
+      
 </head>
-<body>
+<body >
   <?php     
-      if(isset($_GET["link"])){
-        $v = $_GET["link"];
-        
-        include("pages/$v.php");
+    if(isset($_GET["link"])){
+      $v = $_GET["link"];
+        include("$v.php");
+      
     }else{
 
 
@@ -204,12 +251,12 @@ header('Permissions-Policy: autoplay=(self)');
             Version: 1.0.4
         </figcaption>
       </div>
-  
-      <div class="btn-group dropstart">
-        <button type="button" class="btn btn-primary " data-bs-toggle="dropdown" ><i class="fa-solid fa-gear"></i></button>
-        <!-- <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button> -->
+      <div class="btngroup">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary  " data-bs-toggle="dropdown" >
+          <i class="fa-solid fa-gear"></i>
+        </button>
+       
         <ul class="dropdown-menu">
           <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen" >Background</button></li>
           
@@ -222,6 +269,25 @@ header('Permissions-Policy: autoplay=(self)');
           <li><a class="dropdown-item" href="#">Separated link</a></li> -->
         </ul>
       </div>
+      <!-- <div class="btn-group dropstart">
+   
+        <button type="button" class="btn btn-primary " data-bs-target="#login" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="">Login</span>
+        </button>
+        <ul id="login" class="dropdown-menu">
+          <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen" >Background</button></li>
+          
+          <li><span class="" tabindex="0" data-bs-toggle="tooltip" title="ToDo: Coming Soon">
+                <a class="dropdown-item" disabled href="#">Login</a>
+              </span>
+          </li>
+          <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+          <!-- <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Separated link</a></li> 
+        </ul>
+      </div> -->
+      </div>
+      
     </div>
   </div>
   <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -298,7 +364,7 @@ header('Permissions-Policy: autoplay=(self)');
         </div>
         <div>
           <div id="bloglist" class="list-group scrollcont">
-              <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              <a href="index.php?link=pages/blogpage" class="list-group-item list-group-item-action active" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">List group item heading</h5>
                   <small>3 days ago</small>
@@ -321,7 +387,7 @@ header('Permissions-Policy: autoplay=(self)');
                 </div>
                 <p class="mb-1">Some placeholder content in a paragraph.</p>
                 <small class="text-muted">And some muted small print.</small>
-              </a> -->
+              </a>
               <h1>Blog Comming soon</h1>
           
           </div>
@@ -415,5 +481,15 @@ header('Permissions-Policy: autoplay=(self)');
 <script type="module" src="textscript.js"></script>
 <!-- <script type="module" src="talktoai.js"></script>  -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  var toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl, {
+      animation:true,
+      autohide:true,
+      delay:200
+    })
+  })
+</script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php 
-    
     $uservaild = false;
     $passvaild = false;
     $uservalemailval = "";
@@ -109,11 +108,11 @@
 
                 // echo $_SESSION["userid"];
                 // echo session_id();
-                ob_start(); // Start output buffering
 
-                header("Location: index.php?link=pages/admin");
-
-                ob_end_flush(); // Send the buffered output including the modified header
+               
+                include_once("pages/admin.php");
+                //header("Location: login",true);
+           
             }else{
 
 ?>

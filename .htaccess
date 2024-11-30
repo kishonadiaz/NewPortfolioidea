@@ -1,0 +1,69 @@
+Options +FollowSymLinks -MultiViews
+
+<IfModule mod_rewrite.c>
+
+AddType video/webm .webm
+
+AddType video/mp4 .mp4
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+        RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?link=$1& [NC,L,QSA]
+
+    #RewriteCond %{THE_REQUEST} ^.*/index\.php 
+
+    #RewriteRule ^(.*)index.php$ /$1 [R=301,L]  
+
+    DirectoryIndex index.php
+
+
+
+    # ErrorDocument 404 http://example.com/404/
+
+    # ErrorDocument 500 http://example.com/500/
+
+    # or map them to one error document:
+
+   #ErrorDocument 404 http://kishondiaz.com/secret/404.php
+
+    # ErrorDocument 500 /pages/errors/error_redirect.php
+
+    
+
+    # RewriteEngine On
+
+    # RewriteBase /
+
+    
+
+    # RewriteCond %{REQUEST_URI} ^/404/$
+
+    # RewriteRule ^(.*)$ /pages/errors/404.php [L]
+
+    
+
+    # RewriteCond %{REQUEST_URI} ^/500/$
+
+    # RewriteRule ^(.*)$ /pages/errors/500.php [L]
+
+
+
+    
+
+    # or map them to one error document:
+
+    #RewriteCond %{REQUEST_URI} ^/404/$ [OR]
+
+    #RewriteCond %{REQUEST_URI} ^/500/$
+
+    #RewriteRule ^(.*)$ /pages/errors/error_redirect.php [L]
+    Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers: "customKey1,customKey2, headers, Origin, X-Requested-With, Content-Type, Accept, Authorization"
+
+
+</IfModule>
+

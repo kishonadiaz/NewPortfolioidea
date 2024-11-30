@@ -1,7 +1,7 @@
 <?php
 
 
-////////////print_r($_FILES);
+//////////////print_r($_FILES);
 require_once "./config.php";
 $allowedExts = array("jpg","3pg" ,"jpeg","mpeg", "gif", "png","PNG" ,"mp3", "mp4","MP4", "wma","mov","MOV","webm");
 $imageExt = array("jpg", "jpeg", "gif", "png","PNG");
@@ -10,14 +10,14 @@ $audioExt = array("mp3","mpeg");
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 //$POST = array_merge($_POST, json_decode(file_get_contents("php://input"), true));
 // //echo  json_encode($_FILES);
-////////////print_r($_FILES);
-// //////////print_r($_FILES);
-// ////////print_r($_POST);
-// //print_r($_GET);
+//////////////print_r($_FILES);
+// ////////////print_r($_FILES);
+// //////////print_r($_POST);
+// ////print_r($_GET);
 $pageses = $_GET["p"];
 $http= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
 $output = "";
-$outputa = array("html"=> array(),"id"=>array(),"uri"=>array(),"type"=>array(),"previewMediaId"=>array(),"postid"=>0);
+$outputa = array("html"=> array(),"id"=>array(),"uri"=>array(),"type"=>array(),"previewMediaId"=>array(),"postid"=>0, "debug"=>array(),"Errors"=>array());
 $pattern = '/([A-Za-z0-9+\/=]{24,})/';
 
 // Callback function to replace Base64 strings
@@ -31,7 +31,7 @@ function replaceBase64($matches) {
 }
 
 $results = getsingledata("SELECT Count(postId) from post;");
-print_r($results."dsjfhksjhskdkf");
+//print_r($results."dsjfhksjhskdkf");
 if(isset($_POST["who"])){
   $extension = pathinfo($_FILES["FILE"]['name'][0], PATHINFO_EXTENSION);
   
@@ -50,7 +50,7 @@ if(isset($_POST["who"])){
     && ($_FILES["FILE"]["size"][0] < 2000000000)
     && in_array($extension, $allowedExts))
     {
-      //////////print_r($extension);
+      ////////////print_r($extension);
     
       if ($_FILES["FILE"]["error"][0] > 0)
       {
@@ -85,27 +85,28 @@ if(isset($_POST["who"])){
                 
                   //array_push($outputa["id"],$_POST["blocks"][$i]["id"]);
                   //echo $new;
-                  //////////print_r($new);
-                  //////////print_r( $g);
+                  ////////////print_r($new);
+                  ////////////print_r( $g);
                   // $doc = new DOMDocument();
                   // @$doc->loadHTML($g["raw"]);
         
                   // $tags = $doc->getElementsByTagName('img');
                   // foreach ($tags as $tag) {
                   //   $tag->setAttribute('src',$fi);
-                  //   //////////print_r($tag->getAttribute('src'));
+                  //   ////////////print_r($tag->getAttribute('src'));
                   // }
                   // $doc->innerHTML =$tags;
-                  // ////////print_r($doc->innerHTML);
+                  // //////////print_r($doc->innerHTML);
                   // $img = array();
                   // foreach( $g["raw"] as $img_tag)
                   // {
                   //     preg_match_all('/(alt|title|src)=("[^"]*")/i',$img_tag, $img[$img_tag]);
                   // }
 
-                  // ////////print_r($img);
+                  // //////////print_r($img);
                 
-                 // ////////print_r($outputa);
+                 // //////////print_r($outputa);
+                 //print($pageses);
                 $stmt = $db->query("SELECT postId 
                                     FROM post
                                     ORDER BY postId DESC 
@@ -127,22 +128,45 @@ if(isset($_POST["who"])){
                 $key = $_POST["key"];
 
 
-
-                move_uploaded_file($_FILES["FILE"]["tmp_name"][0],
-                $loc. $_FILES["FILE"]["name"][0]);
+                
+                move_uploaded_file($_FILES["FILE"]["tmp_name"][0],$loc. $_FILES["FILE"]["name"][0]);
                 $stmt = $db->query("SELECT postId 
-                FROM postId
+                FROM post
                 ORDER BY postId DESC 
                 LIMIT 1;");
                 $lastId = $stmt->fetchColumn();
                 if(empty($lastId)){
                   $lastId = 1;
+                }else{
+                  $lastId = $lastId + 1;
                 }
                 
                 $cid = "preview";
-                //////print_r($lastId);
+                ////////print_r($lastId);
                 //$adi =basename($_SERVER['PHP_SELF']);
-                $sqlstatement = "INSERT INTO `media`(`filename`,`type`,`filelocation`,`datecreated`,`Whoshtmlid`,`whichid`,`processingpage`,`userkey`) VALUES('$name','$type','$uri','$dateregistered','$cid','$lastId','$pageses','$key');";
+                //print_r($name);
+                //print_r($type);
+                //print_r($uri);
+                //print_r($dateregistered);
+                //print_r($cid);
+                //print_r($lastId);
+                //print_r($pageses);
+                //print_r($key);
+               
+                  array_push($outputa["debug"],$name);
+                  array_push($outputa["debug"],$type);
+                  array_push($outputa["debug"],$uri);
+                  array_push($outputa["debug"],$dateregistered);
+                  array_push($outputa["debug"],$cid);
+                  array_push($outputa["debug"],$lastId);
+                  array_push($outputa["debug"],$pageses);
+                  array_push($outputa["debug"],$key);
+                  array_push($outputa["debug"],$_FILES);
+
+                
+
+
+                $sqlstatement = "INSERT INTO `media`(`filename`,`type`,`filelocation`,`datecreated`,`Whoshtmlid`,`whichid`,`processingpage`,`userkey`) VALUES('$name','$type','$uri','$dateregistered','$cid',$lastId,'$pageses','$key');";
                 $result = $db->exec($sqlstatement);
                 
                
@@ -156,6 +180,7 @@ if(isset($_POST["who"])){
           }catch(Exception $e){
             $key = $_POST["key"];
             $error = $e;
+            array_push($outputa["Errors"],$e);
             //ErrorLog("there was an error uplading",$error,$key);
             //return "exd234\n"."<p>there was an error uplading</p>"."<p>{$e}</p>";
           }
@@ -191,7 +216,7 @@ if(isset($_POST["who"])){
       && ($_FILES["FILE"]["size"][$i] < 2000000000)
       && in_array($extension, $allowedExts))
       {
-        //////////print_r($extension);
+        ////////////print_r($extension);
       
         if ($_FILES["FILE"]["error"][$i] > 0)
         {
@@ -222,7 +247,7 @@ if(isset($_POST["who"])){
                   $result = $db->exec($sqlstatement);
                   $g = json_decode( $_POST["blocks"],true)[$i]["data"];
                   $uri = str_replace("\\","/",GetRootUrl())."/UserFolders/".$_POST["key"]."/Images/".$_FILES["FILE"]["name"][$i];
-                  //////////print_r(json_decode( $_POST["blocks"],true)[$i]["data"]);
+                  ////////////print_r(json_decode( $_POST["blocks"],true)[$i]["data"]);
                   if( $g["type"] == "img"){
                     
                     $test = '
@@ -251,25 +276,25 @@ if(isset($_POST["who"])){
                   
                     //array_push($outputa["id"],$_POST["blocks"][$i]["id"]);
                     //echo $new;
-                    //////////print_r($new);
-                    //////////print_r( $g);
+                    ////////////print_r($new);
+                    ////////////print_r( $g);
                     // $doc = new DOMDocument();
                     // @$doc->loadHTML($g["raw"]);
           
                     // $tags = $doc->getElementsByTagName('img');
                     // foreach ($tags as $tag) {
                     //   $tag->setAttribute('src',$fi);
-                    //   //////////print_r($tag->getAttribute('src'));
+                    //   ////////////print_r($tag->getAttribute('src'));
                     // }
                     // $doc->innerHTML =$tags;
-                    // ////////print_r($doc->innerHTML);
+                    // //////////print_r($doc->innerHTML);
                     // $img = array();
                     // foreach( $g["raw"] as $img_tag)
                     // {
                     //     preg_match_all('/(alt|title|src)=("[^"]*")/i',$img_tag, $img[$img_tag]);
                     // }
 
-                    // ////////print_r($img);
+                    // //////////print_r($img);
                   
                     
                   }
@@ -286,14 +311,15 @@ if(isset($_POST["who"])){
 
                   move_uploaded_file($_FILES["FILE"]["tmp_name"][$i],
                   $loc. $_FILES["FILE"]["name"][$i]);
-                  
                   $stmt = $db->query("SELECT postId 
-                  FROM postId
+                  FROM post
                   ORDER BY postId DESC 
                   LIMIT 1;");
                   $lastId = $stmt->fetchColumn();
                   if(empty($lastId)){
                     $lastId = 1;
+                  }else{
+                    $lastId = $lastId + 1;
                   }
 
                   $g = json_decode( $_POST["blocks"],true)[$i]["data"];
@@ -410,12 +436,14 @@ if(isset($_POST["who"])){
 
                 //imagepng($im, $img_file, 0);
                 $stmt = $db->query("SELECT postId 
-                FROM postId
+                FROM post
                 ORDER BY postId DESC 
                 LIMIT 1;");
                 $lastId = $stmt->fetchColumn();
                 if(empty($lastId)){
                   $lastId = 1;
+                }else{
+                  $lastId = $lastId + 1;
                 }
                   
                   $g = json_decode( $_POST["blocks"],true)[$i]["data"];
@@ -448,7 +476,7 @@ if(isset($_POST["who"])){
                   //$adi =basename($_SERVER['PHP_SELF']);
                   $sqlstatement = "INSERT INTO `media`(`filename`,`type`,`filelocation`,`datecreated`,`Whoshtmlid`,`whichid`,`processingpage`,`userkey`) VALUES('$name','$type','$uri','$dateregistered','$cid','$lastId','$pageses','$key');";
                   $result = $db->exec($sqlstatement);
-                ////////////print_r("sdfsdf"+ $result);
+                //////////////print_r("sdfsdf"+ $result);
                
               }
             }catch(Exception $e){
@@ -525,14 +553,15 @@ if(isset($_POST["who"])){
                 $uri = str_replace("\\","/",GetRootUrl())."/UserFolders/".$_POST["key"]."/Audios/".$_FILES["FILE"]["name"][$i];
                 //$r = $db->query("SELECT * FROM `sec_media` Where userkey='$key' AND isactive=;");
                 $stmt = $db->query("SELECT postId 
-                FROM postId
+                FROM post
                 ORDER BY postId DESC 
                 LIMIT 1;");
                 $lastId = $stmt->fetchColumn();
                 if(empty($lastId)){
                   $lastId = 1;
+                }else{
+                  $lastId = $lastId + 1;
                 }
-                  
                   $g = json_decode( $_POST["blocks"],true)[$i]["data"];
                   
                   $cid;
@@ -562,7 +591,7 @@ if(isset($_POST["who"])){
                   }
                 
                   ////$adi =basename($_SERVER['PHP_SELF']);
-                  ////print_r(//$adi);
+                  //////print_r(//$adi);
                   $sqlstatement = "INSERT INTO `media`(`filename`,`type`,`filelocation`,`datecreated`,`Whoshtmlid`,`whichid`,`processingpage`,`userkey`) VALUES('$name','$type','$uri','$dateregistered','$cid','$lastId','$pageses','$key');";
                   $result = $db->exec($sqlstatement);
                 $isdone = true;

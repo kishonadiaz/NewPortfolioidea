@@ -41,6 +41,7 @@
     if(!function_exists("GetRootUrl"))
     {
         function GetRootUrl(){
+            
             $url = $_SERVER['REQUEST_URI']; //returns the current URL
             $parts = explode('/',$url);
             $dir = $_SERVER['SERVER_NAME'];
@@ -51,7 +52,7 @@
                 //     unset($parts[$i]);
                 // }
                 if($i == 0){
-                    $dir .= $parts[$i].":8081" . "/";
+                    $dir .= $parts[$i].":".$_SERVER['SERVER_PORT'] . "/";
                 }else
                     $dir .= $parts[$i] . "/";
             }

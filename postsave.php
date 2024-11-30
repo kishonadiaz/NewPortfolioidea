@@ -66,8 +66,16 @@
         // print_r("\n");
         // print_r($preview);
         $titles = (isset($title))? $title : "The Post";
-        
-        $sqlstatement = "INSERT INTO `post`(`title`,`content`,`html`,`datecreated`,`mediaid`,`userkey`) VALUES('$titles','$textcontent','$main','$dates',$previewMediaId,'$key');";
+        $stmt = $db->query("SELECT `mediaId`
+        FROM `media`
+        where `whoshtmlid` = 'preview'
+        ORDER BY `mediaId` DESC 
+        LIMIT 1;");
+        foreach($stmt as $v){
+            $lastId = $v['mediaId'];
+        }
+        // $lastId = $stmt->fetchColumn();
+        $sqlstatement = "INSERT INTO `post`(`title`,`content`,`html`,`datecreated`,`mediaid`,`userkey`) VALUES('$titles','$textcontent','$main','$dates',$lastId,'$key');";
         $result = $db->exec($sqlstatement);
 
         $stmt = $db->query("SELECT postId 

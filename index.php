@@ -1,5 +1,9 @@
 <?php
-ob_start(); // Start output buffering
+require_once 'config.php';
+require_once 'createtable.php';
+// ob_start(); // Start output buffering
+if (!headers_sent()) {
+  header("Location: ");
 header('Access-Control-Allow-Origin: *');
 header('Permissions-Policy: autoplay=(self)');
 
@@ -12,15 +16,18 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+}
 
 //session_set_cookie_params(['samesite' => 'None']);
 
-session_name("kport");
 
-session_start();
-ob_end_flush(); // Send the buffered output including the modified header
-require_once 'config.php';
-require_once 'createtable.php'
+  session_name("kport");
+
+  session_start();
+
+ // Send the buffered output including the modified header
+
+// ob_end_flush(); 
 
 ?>
 <!DOCTYPE html>
@@ -211,12 +218,12 @@ require_once 'createtable.php'
       
 </head>
 <body >
-  <?php     
-    if(isset($_GET["link"])){
-      $v = $_GET["link"];
-        include("$v.php");
-      
-    }else{
+<?php  
+if(isset($_GET["link"])){
+  $v = $_GET["link"];
+    include("$v.php");
+  
+}else{
 
 
   

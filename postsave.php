@@ -2,7 +2,10 @@
     require_once "./config.php";
     //print_r($_GET);
     $d = json_decode($_POST["data"],true);
-    //print_r($d);
+
+
+    array_push($d,array(["debug"]));
+    // print_r($d);
     $title = "";
     $main="";
     $preview;
@@ -44,19 +47,28 @@
     
     }
     $get = $_GET["action"];
+    $id;
+    $profilename ="";
+    if(isset($_GET["id"]))
+        $id = $_GET["id"];
+    if(isset($_GET["profileimg"]))
+        $profilename = $_GET["profileimg"];
     //if(isset($previewMediaId))
     //print_r($previewMediaId);
     // print_r("$get\n");
-    if($get=="edited"){
-        $stmt = $db->query("SELECT mediaId 
-        FROM media
-        ORDER BY mediaId DESC 
-        LIMIT 1;");
+    if($get=="edit"){
+        
+
+        $stmt = $db->query("SELECT mediaId FROM `media` WHERE filename= '$profilename'");
         $lastId = $stmt->fetchColumn();
+        if($profilename == "")
+            $lastId =-1;
         $titles = (isset($title))? $title : "The Post";
         $dates = date('Y-m-d H:i:s');
-        $sqlstatement = "UPDATE `post` SET `title`='$titles',`content`='$textcontent',`html`='$main',`datecreated`='$dates',`mediaid`=$previewMediaId  WHERE userkey = '$key' AND mediaId='$lastId';";
+        $sqlstatement = "UPDATE `post` SET `title`='$titles',`content`='$textcontent',`html`='$main',`datemodified`='$dates',`mediaId`=$lastId  WHERE userkey = '$key' AND postId='$id';";
         $result = $db->exec($sqlstatement);
+        $d[$id]["postid"] = $id;
+       
         
     }else{
         
@@ -66,16 +78,28 @@
         // print_r("\n");
         // print_r($preview);
         $titles = (isset($title))? $title : "The Post";
-        $stmt = $db->query("SELECT `mediaId`
-        FROM `media`
-        where `whoshtmlid` = 'preview'
-        ORDER BY `mediaId` DESC 
-        LIMIT 1;");
-        foreach($stmt as $v){
-            $lastId = $v['mediaId'];
+        // $stmt = $db->query("SELECT `mediaId`
+        // FROM `media`
+        // where `whoshtmlid` = 'preview'
+        // ORDER BY `mediaId` DESC 
+        // // LIMIT 1;");
+        // foreach($stmt as $v){
+        //     $lastId = $v['mediaId'];
+        // }
+       
+        if($profilename != ""){
+            $stmt = $db->query("SELECT mediaId FROM `media` WHERE filename= '$profilename'");
+            $lastId =(int)$stmt->fetchColumn();
         }
+        else{
+            $lastId =-1;
+        }
+   
+        
+
+   
         // $lastId = $stmt->fetchColumn();
-        $sqlstatement = "INSERT INTO `post`(`title`,`content`,`html`,`datecreated`,`mediaid`,`userkey`) VALUES('$titles','$textcontent','$main','$dates',$lastId,'$key');";
+        $sqlstatement = "INSERT INTO `post`(`title`,`content`,`html`,`datecreated`,`mediaId`,`userkey`) VALUES('$titles','$textcontent','$main','$dates',  $lastId,'$key');";
         $result = $db->exec($sqlstatement);
 
         $stmt = $db->query("SELECT postId 

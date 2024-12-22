@@ -60,8 +60,8 @@
     $db->exec($sqlstatment);
     $sqlstatment = 'CREATE TABLE IF NOT EXISTS `post`(`postId` INT NOT NULL AUTO_INCREMENT,
         `title` VARCHAR(100) NOT NULL,
-        `content` Text,
-        `html` TEXT,
+        `content` LONGTEXT,
+        `html` LONGTEXT,
         `hasmedia` BOOLEAN DEFAULT 1,
         `datecreated` DATE,
         `datemodified` DATE,

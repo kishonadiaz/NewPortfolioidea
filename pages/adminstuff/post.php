@@ -5,7 +5,8 @@
     
     
     
-        $r = $db->query("SELECT * FROM `users` WHERE userkey='$key'");
+        $r = $db->query("SELECT html FROM `post` WHERE postid=1");
+        $d = $r->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <script>
@@ -17,10 +18,14 @@
 <div class="m-auto d-flex justify-content-between">
     <button  type="button" class="btn ms-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa-solid fa-ellipsis"></i></button>
     <div class="col-5">
-        <input id="posttitInput" class="form-control " type="text" placeholder="Post Title" aria-label="title ">
+        <input id="posttitInput" class="form-control " type="text" placeholder="Post Title" aria-label="title "  data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" required>
     </div>
     
-    <button id="update" type="button" class="me-4 btn ">Update</button>
+    <div>
+      <button id="update" type="button" class="btn ">Update</button>
+      <a id="done" type="button" href="?link=pages/admin" class="me-4 btn ">Done</a>
+    </div>
+  
 </div>
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
@@ -29,8 +34,8 @@
   </div>
   <div class="offcanvas-body">
      <div>
-        <label  class="form-label " for="postimg">Add Post Image</label>
-        <input   class="form-control " type="file" name="postimg" accept="Image/*" id="postimg">
+        <label  class="form-label " id="postprolbl" for="postimg">Add Post Image</label>
+        <input   class="form-control " type="file" name="postimg" hidden accept="Image/*" id="postimg">
      </div>
      <div id="preview" class="mt-5">
 

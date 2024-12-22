@@ -67,6 +67,9 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Autho
 <script src="https://cdn.jsdelivr.net/npm/editorjs-parser@1/build/Parser.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.browser.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/createjs@1.0.1/builds/1.0.0/createjs.min.js"></script> -->
+<script src="test.js"></script>
+
+
 <style>
   .content{
     position: absolute;
@@ -206,10 +209,13 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Autho
     max-width: 100%;
     margin-bottom: 15px;
   }
-  /* .toast{
-    transform:translateX(100%);
-    transition: transform .1s ease-in-out 
+  .toast{
+    z-index: 10000;
+    position: fixed;
+    /* transform:translateX(100%); */
+    /* /transition: transform .1s ease-in-out  */
   }
+  /*
   .toast.show{
     transform:translateX(0);
   } */
@@ -497,6 +503,9 @@ if(isset($_GET["link"])){
       delay:200
     })
   })
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 </script>
+
 </body>
 </html>

@@ -14,12 +14,12 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 // ////////////print_r($_FILES);
 // //////////print_r($_POST);
 // ////print_r($_GET);
-$pageses = $_GET["p"];
+// $pageses = $_GET["p"];
 $http= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
 $output = "";
-$outputa = array("html"=> array(),"id"=>array(),"uri"=>array(),"type"=>array(),"previewMediaId"=>array(),"postid"=>0, "debug"=>array(),"Errors"=>array());
+$outputa = array("html"=> array(),"id"=>array(),"uri"=>array(),"type"=>array(),"previewMediaId"=>array(),"postid"=>0,"blocks"=>array(), "debug"=>array(),"Errors"=>array());
 $pattern = '/([A-Za-z0-9+\/=]{24,})/';
-
+$pageses = "";
 // Callback function to replace Base64 strings
 function replaceBase64($matches) {
     global $uri;
@@ -32,6 +32,11 @@ function replaceBase64($matches) {
 
 $results = getsingledata("SELECT Count(postId) from post;");
 //print_r($results."dsjfhksjhskdkf");
+if(empty( $_POST["blocks"])){
+  $a = ["error"=>"there was an error in blocks"];
+  echo json_encode($a);
+  return;
+}
 if(isset($_POST["who"])){
   $extension = pathinfo($_FILES["FILE"]['name'][0], PATHINFO_EXTENSION);
   
@@ -159,7 +164,6 @@ if(isset($_POST["who"])){
                   array_push($outputa["debug"],$dateregistered);
                   array_push($outputa["debug"],$cid);
                   array_push($outputa["debug"],$lastId);
-                  array_push($outputa["debug"],$pageses);
                   array_push($outputa["debug"],$key);
                   array_push($outputa["debug"],$_FILES);
 
@@ -612,6 +616,11 @@ if(isset($_POST["who"])){
 
       
     }
+  }
+  if($_POST["blocks"]){
+    //TODO FIX IN UPDATE SIDE TOOO
+    // array_push($outputa["debug"], $_POST["blocks"]);
+    // array_push($outputa["blocks"],json_encode($_POST["blocks"]));
   }
 }
 

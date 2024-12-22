@@ -1,15 +1,19 @@
 class Mediajs{
     self;
-    constructor({data,api,config}){
+    constructor({data,api,readonly,config}){
         this.config = config || {};
         this.api = api
         this.cont = document.createElement("div");
         this.label = document.createElement("label");
         this.media = document.createElement('input');
-        this.preview = undefined
+        this.preview = document.createElement("div")
         this.file = undefined
         this.ismedia = false;
+        this.html = "";
         self = this;
+    }
+    static get isReadOnlySupported() {
+        return true;
     }
     static get toolbox() {
         return {
@@ -20,6 +24,13 @@ class Mediajs{
     static get hasmedia(){
         if(self)
         return self.ismedia;
+    }
+    static set settorender(val=()=>{}){
+        if(self)
+            val(self);
+    }
+    torender(){
+        return self.html;
     } 
     render(){
         
@@ -34,6 +45,7 @@ class Mediajs{
         this.onEvent();
         this.api.ui.wrapper = this.cont
         self = this;
+       
         return this.cont;
     }
     static set  updata(vale){
@@ -55,6 +67,7 @@ class Mediajs{
                     reader.onload = (e) => {
                     // Handle the file data here
                         if (this.file.type.startsWith('image/')) {
+                            
                             this.preview = document.createElement("img");
                             this.preview.src = e.target.result;
                         } else  
@@ -114,11 +127,11 @@ class Mediajs{
       }
     save(blockContent){
         
-        //console.log(blockContent,this.file);
+        console.log(blockContent,this.file);
         return {
           url: blockContent.value,
           raw:String(blockContent.innerHTML),
-          type:String(this.preview.tagName).toLowerCase(),
+          type:String((this.preview.tagName==undefined)?"text":this.preview.tagName).toLowerCase(),
           file:this.file
 
         }

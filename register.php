@@ -139,8 +139,8 @@ try{
                 //die('Failed to create directories...');
                 echo "failed to make dir";
             }
-            
-            header("Location: index.php?link=login");
+            include_once("login.php");
+            //header("Location: index.php?link=login");
 
         }else{
             //echo "herrrsssss";

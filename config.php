@@ -4,7 +4,7 @@
     // $root = 'webdevkishon';
     // $pass = '$K7139Diaz';
     $root = 'root';
-    $pass = "";
+    $pass = "\$K7139Diaz";
 
     $db = new PDO($dns,$root,$pass,array(PDO::ATTR_PERSISTENT => true, PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
     //error catching mysql

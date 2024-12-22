@@ -7,7 +7,8 @@
         z-index: 10000;
     }
     #menu{
-        border: 1px solid black;
+        border-radius:4px;
+        border-right: 1px solid black;
         display: inline-block;
         height: 100%;
         padding: 32px 5%;
@@ -59,7 +60,12 @@
     
     }
     #content{
-        margin: 5px 30%;
+        /* margin: 5px 10%; */
+        /* pointer-events: none; Prevents interaction with the element */
+        /* user-select: none; Prevents text selection within the element */
+        overflow:auto;
+        
+        
     }
     #content li{
         list-style: none;
@@ -67,18 +73,28 @@
     #content p {
         padding:0;
     }
-    #content img, #menufill img{
-        height:57px;
+    #content video{
+        /* width: 30%; */
+    
+    }
+    #content img , #menufill img{
+        /* height:10%; */
     }
     .navbar{
         background:lightgrey!important;
     }
     
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: unset;
+    }
+    
 </style>
 <nav class="navbar navbar-light bg-light d-flex flex-nowrap">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php"><i class="fa-solid fa-angle-left"></i></a>
+    <a class="navbar-brand" href="index.php"><i class="fa-solid fa-angle-left"></i>Kishon Diaz</a>
   </div>
+
   <div><a id="giticon" target="_blank" rel="noopener noreferrer" ><i style="font-size:20px;margin-right:20px;"  class="fa-brands fa-github"></i></a></div>
   
 </nav>
@@ -109,8 +125,9 @@
 <main>
     <div>
         <div>
-            <div id="content" class="col-8">
-              
+            <div id="content" contenteditable="false"  class="col-8 ">
+                <h1 id="title" ></h1>
+                <div id="editor" contenteditable="false"></div>
             </div>
             
 
@@ -121,10 +138,10 @@
 
 </main>
 
-<?php
-    print_r($_GET)
-
-?>
+<script type="module" src="./pages/blogpage.js"></script>
+<script>
+    
+</script>
 
 
 
